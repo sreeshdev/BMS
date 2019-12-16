@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="favicon.ico" >
+    <title>BookMyShow</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <!-- <script src="main.js"></script> -->
+  </head>
+  <!-- add commit -->
+  <body>
+    <div class="header">
+      <a href="#"
+        ><img src="images/logo.png" alt="logo" width="150" height="50"
+      /></a>
+      <input
+        type="text"
+        placeholder="       Search for Movies,Events,plays,Sports and Activities"
+      />
+      <div class="select">
+        <select class="sel-city">
+          <option value="volvo">Coimbatore</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
+        <select class="sel-lang">
+          <option value="volvo">English</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
+        <button class="but">Sign In</button>
+       <span class="ham-burger"onclick="openNav()">&#9776;</span>
+      </div>
+      <!-- <div id="mySidenav" class="hamburger">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
+          </div> -->
+      <script>
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "25%";
+            }
+            
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+            }
+            </script>
+    </div>
+    <div>
+      <nav class="nav-bar">
+        <a href="#movies" class="nav-button llr">Movies</a>
+        <a href="#events" class="nav-button ">Events</a>
+        <a href="#plays" class="nav-button ">Plays</a>
+        <a href="#sports" class="nav-button ">Sports</a>
+        <a href="#activities" class="nav-button ">Activities</a>
+        <a href="#monuments" class="nav-button ">Monuments</a>
+        <a href="#fanhood" class="nav-button ">Fanhood</a>
+        <a href="#buzz" class="nav-button ">Buzz</a>
+        <a href="#corporates" class="nav-button but-right lr">Corporates</a>
+        <a href="#offers" class="nav-button but-right">offers</a>
+        <a href="#gift-cards" class="nav-button but-right rr">Gift Cards</a>
+      </nav>
+    </div>
+    <div class="slideshow-container">
+      <div class="mySlides fade">
+        <img src="images/banner1.jpg" style="width:100%" />
+      </div>
+      <div class="mySlides fade">
+        <img src="images/banner2.webp" style="width:100%" />
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br />
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+    </div>
+    <script>
+      var slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1;
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+      }
+    </script>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">&uArr;</button>
+    <script>
+      //Get the button
+      var mybutton = document.getElementById("myBtn");
+      
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function() {scrollFunction()};
+      
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+      
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        // document.body.scrollTop = 0;
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      } 
+      function sortListDir() {
+          var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+          list = document.getElementById("movie-pane");
+          switching = true;
+          // Set the sorting direction to ascending:
+          dir = "asc"; 
+          // Make a loop that will continue until no switching has been done:
+          while (switching) {
+            // start by saying: no switching is done:
+            switching = false;
+            b = list.getElementsByTagName("h5");
+            cards = list.getElementsByClassName("card");
+            // Loop through all list-items:
+            for (i = 0; i < (b.length - 1); i++) {
+              //start by saying there should be no switching:
+              shouldSwitch = false;
+              /* check if the next item should switch place with the current item,
+              based on the sorting direction (asc or desc): */
+              if (dir == "asc") {
+                if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+                  /* if next item is alphabetically lower than current item,
+                  mark as a switch and break the loop: */
+                  shouldSwitch = true;
+                  break;
+                }
+              } else if (dir == "desc") {
+                if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
+                  /* if next item is alphabetically higher than current item,
+                  mark as a switch and break the loop: */
+                  shouldSwitch= true;
+                  break;
+                }
+              }
+            }
+            if (shouldSwitch) {
+              /* If a switch has been marked, make the switch
+              and mark that a switch has been done: */
+              cards[i].parentNode.insertBefore(cards[i + 1], cards[i]);
+              switching = true;
+              // Each time a switch is done, increase switchcount by 1:
+              switchcount ++;
+            } else {
+              /* If no switching has been done AND the direction is "asc",
+              set the direction to "desc" and run the while loop again. */
+              if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+              }
+            }
+          }
+        }
+      </script>
+      
+    <div class="func-bar">
+      <div class="search-bar">
+        <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for Movie Title.." >
+      
+    </div>  
+      <div class="sort-but">
+        <button class="add-movie" onclick="sortListDir()">Sort</button>
+      </div>
+      <div class="add-button">
+          <button class="add-movie" id="addBtn">Add Movies</button>
+      </div>
+    </div>
+    <script language="JavaScript">
+     
+          function searchFunction() {
+            var input, filter, cards, cardContainer, h5, title, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            cardContainer = document.getElementById("movie-pane");
+            cards = cardContainer.getElementsByClassName("card");
+            for (i = 0; i < cards.length; i++) {
+                title = cards[i].querySelector(".container .mov-rate h5");
+                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+}
+        function addCode() { 
+            // document.getElementById("movie-pane").innerHTML +=  
+            //   "<h3>This is the text which has been inserted by JS</h3>"; 
+            var title= document.getElementById("title").value;
+            var rating= document.getElementById("rating").value;
+            var movieType= document.getElementById("movieType").value;
+            var url = document.getElementById("url").value;
+              document.getElementById('movTitle').innerHTML = title;
+                           
+                            document.getElementById('movRating').innerHTML += rating;
+                            
+                            document.getElementById('movType').innerHTML = movieType;
+                            
+                            document.getElementById("add-movie-form").reset();
+                          
+        } 
+            function showInput() {
+                var iDiv = document.createElement('div');
+                iDiv.id = 'block';
+                iDiv.className = 'card';
+                var image = document.createElement('img');
+                image.id = 'image';
+                image.className="card-img";
+                image.src= document.getElementById("url").value;
+                iDiv.appendChild(image);
+                // Now create and append to iDiv
+                var innerDiv = document.createElement('div');
+                innerDiv.className = 'container';
+
+                // The variable iDiv is still good... Just append to it.
+                iDiv.appendChild(innerDiv);
+
+                var contDiv = document.createElement('div');
+                contDiv.className = 'mov-rate';
+
+                // The variable iDiv is still good... Just append to it.
+                innerDiv.appendChild(contDiv);
+
+                var rate = document.createElement('h4');
+                rate.id = 'movRating';
+                rate.value="&hearts;";
+                contDiv.appendChild(rate);
+
+                var title = document.createElement('h5');
+                title.id = 'movTitle';
+                contDiv.appendChild(title);
+
+                var type = document.createElement('p');
+                type.id = 'movType';
+                contDiv.appendChild(type);
+
+                document.getElementById('movie-pane').prepend(iDiv);
+               addCode();
+               modal.style.display = "none";
+            }
+          </script>
+    <div id="addMovie" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Add Movies</h2>
+              <form id="add-movie-form">
+                  <input type="text" placeholder="Movie Title" id="title" class="input">
+                  <input type="text" placeholder="Movie Rating" id="rating" class="input">
+                  <input type="text" placeholder="Image URL" id="url" class="input">
+                  <input type="text" placeholder="Movie Type" id="movieType" class="input">
+              </form>
+
+               <input type="submit" onclick="showInput();" class="input-but">
+            </div>
+          
+          </div>
+          
+          <script>
+          // Get the modal
+          var modal = document.getElementById("addMovie");
+          
+          // Get the button that opens the modal
+          var btn = document.getElementById("addBtn");
+          
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
+          
+          // When the user clicks the button, open the modal 
+          btn.onclick = function() {
+            modal.style.display = "block";
+          }
+          
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+          
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          
+          }
+          </script>
+         
+    <div class="heading">
+            <h2>Movies</h2>
+            <a href="#">view all</a>
+          </div>
+
+    <div class="content">
+      <div class="sidenav">
+            <h2 style="padding-left: 40px; font-weight: 50; ">
+                    Trending searches
+                  </h2>
+        <a href="#"
+          >Kaappaan<br />
+          <p>Movies</p>
+        </a>
+        <hr />
+        <a href="#"
+          >Enai Noki Paayum Thota<br />
+          <p>Movies</p>
+        </a>
+        <hr />
+        <a href="#"
+          >Kaithi<br />
+          <p>Movies</p>
+        </a>
+        <hr />
+        <a href="#"
+          >Frozen 2<br />
+          <p>Movies</p>
+        </a>
+      </div>
+      <div class="movies-pane" id="movie-pane">
+            <!-- <div class="card">
+                    <img
+                      src="images/enpt.jpg"
+                      alt="Avatar"
+                      class="card-img"
+                    />
+                    <div class="container">
+                      <div class="mov-rate">
+                        <h4 id="movRating">&hearts;</h4>
+                        <h5 id="movTitle"></h5>
+                        <br />
+                        <p id="movType"></p>
+                        <div class="mov-type"><br /></div>
+                      </div>
+                    </div>
+                  </div> -->
+        <div class="card">
+          <img
+            src="images/enpt.jpg"
+            alt="Avatar"
+            class="card-img"
+          />
+          <div class="container">
+            <div class="mov-rate">
+              <h4>&hearts; 64%</h4>
+              <h5>Ennai Noki Payum Thotta</h5>
+              <br />
+              <p>UA | Romantic | Tamil</p>
+              <div class="mov-type"><br /></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="images/enpt.jpg"
+            alt="Avatar"
+            class="card-img"
+          />
+          <div class="container">
+            <div class="mov-rate">
+              <h4>&hearts; 64%</h4>
+              <h5>Ennai Noki Payum Thotta</h5>
+              <br />
+              <p>UA | Romantic | Tamil</p>
+              <div class="mov-type"><br /></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="images/enpt.jpg"
+            alt="Avatar"
+            class="card-img"
+          />
+          <div class="container">
+            <div class="mov-rate">
+              <h4>&hearts; 64%</h4>
+              <h5>Ennai Noki Payum Thotta</h5>
+              <br />
+              <p>UA | Romantic | Tamil</p>
+              <div class="mov-type"><br /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="heading">
+      <h2>Events</h2>
+      <a href="#">view all</a>
+    </div>
+    <div class="events-pane">
+      <div class="card">
+        <img
+          src="images/event1.webp"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="images/event1.webp"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="images/event1.webp"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="heading">
+      <h2>Plays</h2>
+      <a href="#">view all</a>
+    </div>
+    <div class="events-pane">
+      <div class="card">
+        <img
+          src="images/play1.jpg"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="images/play1.jpg"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="images/play1.jpg"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="heading">
+      <h2>Activities</h2>
+      <a href="#">view all</a>
+    </div>
+    <div class="events-pane">
+      <div class="card">
+        <img
+          src="images/activity1.webp"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="images/activity1.webp"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="images/activity1.webp"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="heading">
+      <h2>Sports</h2>
+      <a href="#">view all</a>
+    </div>
+    <div class="events-pane last-pane">
+      <div class="card">
+        <img
+          src="images/sport1.jpg"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="images/sport1.jpg"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="images/sport1.jpg"
+          alt="Avatar"
+          class="card-img"
+        />
+        <div class="container">
+          <div class="mov-rate">
+            <h4>&hearts; 64%</h4>
+            <h5>Ennai Noki Payum Thotta</h5>
+            <br />
+            <p>UA | Romantic | Tamil</p>
+            <div class="mov-type"><br /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <h5 class="foot-1">Privacy Note</h5>
+      <p class="foot-1 down">
+        By using www.bookmyshow.com(our website), you are fully accepting the
+        Privacy Policy available at
+        <a href="https://bookmyshow.com/privacy"
+          >https://bookmyshow.com/privacy</a
+        >
+        governing your access to Bookmyshow and provision of services by
+        Bookmyshow to you. If you do not accept terms mentioned in the
+        <a href="#">Privacy Policy</a>
+        , you must not share any of your personal information and immediately
+        exit Bookmyshow.
+      </p>
+      <div class="foot-2">
+        <div class="sup-wrapper">
+          <a
+            class="col-1 sup-action-container"
+            href="https://support.bookmyshow.com/support/home?regionCode=COIM"
+            style="text-decoration: none;"
+          >
+            <div class="__sup-icon">
+             <br />
+              <p class="text-foot" style="color:rgb(148, 143, 143);text-decoration:none;">24/7 CUSTOMER CARE</p>
+            </div>
+          </a>
+          <div
+            class="col-1 sup-action-container"
+            data-modal="resendCofirmationPopup"
+          >
+            <div class="__sup-icon">
+                <br>
+              <p class="text-foot" style="color:rgb(148, 143, 143);text-decoration: none;">RESEND BOOKING CONFIRMATION</p>
+            </div>
+          </div>
+          <div
+            class="col-1 sup-action-container"
+            data-modal="subscribeNewsletters"
+          >
+            <div class="__sup-icon">
+             </span
+              ><br />
+              <p class="text-foot" style="color:rgb(148, 143, 143);text-decoration: none;">SUBSCRIBE TO THE NEWSLETTER</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot-3">
+
+        <ul class="link-list">
+                <li>
+                  <a href="/mumbai/movies" class="link-foot" title="Online Movie Ticket Booking Mumbai">
+                    <span style=" text-decoration: none;
+                    color: white;">Online Movie Ticket Booking Mumbai </span>
+                    <span class="seprator"> | </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/delhi/movies" class="link-foot"title="Online Movie Ticket Booking Delhi">
+                    <span>Online Movie Ticket Booking Delhi</span>
+                    <span class="seprator"> | </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/bengaluru/movies"class="link-foot" title="Online Movie Ticket Booking Bengaluru">
+                    <span>Online Movie Ticket Booking Bengaluru</span>
+                    <span class="seprator"> | </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/hyderabad/movies"class="link-foot" title="Online Movie Ticket Booking Hyderabad">
+                    <span>Online Movie Ticket Booking Hyderabad</span>
+                    <span class="seprator"> | </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/chennai/movies" class="link-foot"title="Online Movie Ticket Booking Chennai">
+                    <span>Online Movie Ticket Booking Chennai</span>
+                    <span class="seprator"> | </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/kolkata/movies"class="link-foot" title="Online Movie Ticket Booking Kolkata">
+                    <span>Online Movie Ticket Booking Kolkata</span>
+                    <span class="seprator"> | </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/noida/movies" class="link-foot"title="Online Movie Ticket Booking Noida">
+                    <span>Online Movie Ticket Booking Noida</span>
+                    <span class="seprator"> | </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/ahmedabad/movies"class="link-foot" title="Online Movie Ticket Booking Ahmedabad">
+                    <span>Online Movie Ticket Booking Ahmedabad</span>
+                    <span class="seprator"> | </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/pune/movies" class="link-foot"title="Online Movie Ticket Booking Pune">
+                    <span>Online Movie Ticket Booking Pune</span>
+                  </a>
+                </li>
+              </ul>
+
+      </div>
+      <div class="footer-content">
+            <!-- Footer links starts here -->
+    <!-- New-Footer links starts here -->
+    <div class="footers-links">
+      <div class="row">
+                      <div class="col movies-by-genre">
+          <h4>BEST LANGUAGE GENRE MOVIES</h4>
+          <ul class="by-genre-column">
+            <li>
+              <a href="/movies/hindi/comedy" title="Hindi Comedy Movies" class="link-foot">
+                <span>Hindi Comedy Movies</span><span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/hindi/action" title="Hindi Action Movies" class="link-foot">
+                <span>Hindi Action Movies</span><span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/english/animation" title="English Animated Movies" class="link-foot">
+                <span>English Animated Movies</span><span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/english/fantasy" title="English Fantasy Movies" class="link-foot">
+                <span>English Fantasy Movies</span><span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/english/comedy" title="English Comedy Movies" class="link-foot">
+                <span>English Comedy Movies</span><span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/english/action" title="English Action Movies" class="link-foot">
+                <span>English Action Movies</span><span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/tamil/action" title="Tamil Action Movies" class="link-foot">
+                <span>Tamil Action Movies</span><span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/tamil/comedy" title="Tamil Comedy Movies" class="link-foot">
+                <span>Tamil Comedy Movies</span><span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/telugu/action" title="Telugu Action Movies" class="link-foot">
+                <span>Telugu Action Movies</span>
+                <span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/gujarati/comedy" title="Gujarati Comedy Movies" class="link-foot">
+                <span>Gujarati Comedy Movies</span>
+                <span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/marathi/drama" title="Marathi Drama Movies" class="link-foot">
+                <span>Marathi Drama Movies</span>
+                <span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/marathi/comedy" title="Marathi Comedy Movies" class="link-foot">
+                <span>Marathi Comedy Movies</span>
+                <span class="seprator"> | </span>
+              </a>
+            </li>
+            <li>
+              <a href="/movies/hindi/animation" title="Hindi Animated Movies"class="link-foot">
+                <span>Hindi Animated Movies</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+                     <div class="col movies-by-genre">
+         <h4>MOVIES BY GENRE </h4>
+         <ul class="by-genre-column">
+           <li>
+             <a href="/movies/action" title="Best Action Movies" class="link-foot">
+               <span>Best Action Movies</span><span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/romance" title="Best  Romantic Movies" class="link-foot">
+               <span>Best  Romantic Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/comedy" title="Best Comedy Movies" class="link-foot">
+               <span>Best Comedy Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/adult" title="Best Adult Movies" class="link-foot">
+               <span>Best Adult Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/adventure" title="Best Adventure Movies" class="link-foot">
+               <span>Best Adventure Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/biography" title="Best Biography Movies" class="link-foot">
+               <span>Best Biography Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/classic" title="Best Classic Movies" class="link-foot">
+               <span>Best Classic Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/crime" title="Best Crime Movies" class="link-foot">
+               <span>Best Crime Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/drama" title="Best Drama Movies" class="link-foot">
+               <span>Best Drama Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/family" title="Best Family Movies" class="link-foot">
+               <span>Best Family Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/fantasy" title="Best Fantasy Movies" class="link-foot">
+               <span>Best Fantasy Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/history" title="Best History Movies" class="link-foot">
+               <span>Best History Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/musical" title="Best Musical Movies" class="link-foot">
+               <span>Best Musical Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/mystery" title="Best Mystery Movies" class="link-foot">
+               <span>Best Mystery Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/scifi" title="Best Sci-Fi Movies" class="link-foot">
+               <span>Best Sci-Fi Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/suspense" title="Best Suspense Movies" class="link-foot">
+               <span>Best Suspense Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/thriller" title="Best Thriller Movies" class="link-foot">
+               <span>Best Thriller Movies</span>
+               <span class="seprator"> | </span>
+             </a>
+           </li>
+           <li>
+             <a href="/movies/western" title="Best  Western Movies" class="link-foot">
+               <span>Best  Western Movies</span>
+             </a>
+           </li>
+         </ul>
+       </div>
+      <div class="col movies-by-language">
+        <h4>POPULAR MOVIES BY LANGUAGE</h4>
+        <ul class="by-language-column">
+          <li>
+            <a href="/movies/hindi" title="Popular Hindi Movies"class="link-foot">
+              <span>Popular Hindi Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/english" title="Popular English Movies" class="link-foot">
+              <span>Popular English Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/marathi" title="Popular Marathi Movies" class="link-foot">
+              <span>Popular Marathi Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/bengali" title="Popular Bengali Movies" class="link-foot">
+              <span>Popular Bengali Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/tamil" title="Popular Tamil Movies" class="link-foot">
+              <span>Popular Tamil Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/telugu" title="Popular Telugu Movies" class="link-foot">
+              <span>Popular Telugu Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/malayalam" title="Popular Malayalam Movies" class="link-foot">
+              <span>Popular Malayalam Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/bhojpuri" title="Popular Bhojpuri Movies" class="link-foot">
+              <span>Popular Bhojpuri Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/kannada" title="Popular Kannada Movies" class="link-foot">
+              <span>Popular Kannada Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/punjabi" title="Popular Punjabi Movies" class="link-foot">
+              <span>Popular Punjabi Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/gujarati" title="Popular Gujarati Movies" class="link-foot">
+              <span>Popular Gujarati Movies</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/movies/sindhi" title="Popular Sindhi Movies"class="link-foot" >
+              <span>Popular Sindhi Movies</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col movies-reviews">
+        <h4>MOVIE REVIEWS</h4>
+        <ul class="groups">
+          <li>
+            <a href="/discover" rel="noopener noreferrer" target="_blank" title="Trending Articles" class="link-foot">
+              <span>Trending Articles</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/entertainment-news/" class="link-foot" rel="noopener noreferrer" target="_blank" title="Latest News on Movies, Events, Plays &amp; Sports">
+              <span>Latest News on Movies, Events, Plays &amp; Sports</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="/entertainment/topic/rajeev-masand" class="link-foot" rel="noopener noreferrer" target="_blank" title="Rajeev Masand Movie Reviews">
+              <span>Rajeev Masand Movie Reviews</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="//in.bookmyshow.com/entertainment/topic/anupama-chopra" class="link-foot" rel="noopener noreferrer" target="_blank" title="Anupama Chopra Movie Review">
+              <span>Anupama Chopra Movie Review</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="//in.bookmyshow.com/entertainment/topic/film-reviews" class="link-foot"rel="noopener noreferrer" target="_blank" title="Film Reviews">
+              <span>Film Reviews</span>
+              <span class="seprator"> | </span>
+            </a>
+          </li>
+          <li>
+            <a href="//in.bookmyshow.com/entertainment/write-us"class="link-foot" rel="noopener noreferrer" target="_blank" title="Guest Blogging">
+              <span>Guest Blogging</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col">
+        <div class="col latest-movies" id="video">
+                          <h4>THINGS TO DO  IN COIMBATORE</h4>
+           <ul class="groups">
+             <li>
+               <a href="/coimbatore/activities/adventure" class="link-foot"title=" Adventure Activities in Coimbatore">
+                 <span>Adventure Activities  in Coimbatore</span><span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/food-and-drinks" class="link-foot"title=" Food Events in Coimbatore">
+                 <span>Food Events  in Coimbatore</span><span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/unique-tours"class="link-foot" title=" Family Tours in Coimbatore">
+                 <span>Family Tours  in Coimbatore</span><span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/amusement-parks"class="link-foot" title=" Amusement Parks in Coimbatore">
+                 <span>Amusement Parks  in Coimbatore</span><span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/gaming" class="link-foot"title=" Gaming Events in Coimbatore">
+                 <span>Gaming Events  in Coimbatore</span><span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/nightlife" class="link-foot"title=" Nightlife Events in Coimbatore">
+                 <span>Nightlife Events  in Coimbatore</span><span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/monuments"class="link-foot" title=" Places To Visit in Coimbatore">
+                 <span>Places To Visit  in Coimbatore</span><span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/tourist-attractions" class="link-foot"title=" Tourist Attractions in Coimbatore">
+                 <span>Tourist Attractions  in Coimbatore</span>
+                 <span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/christmas-celebrations"class="link-foot" title=" Christmas Celebrations in Coimbatore">
+                 <span>Christmas Celebrations  in Coimbatore</span>
+                  <span class="seprator"> | </span>
+               </a>
+             </li>
+             <li>
+               <a href="/coimbatore/activities/new-year-parties" class="link-foot"title=" New Year Parties in Coimbatore">
+                 <span>New Year Parties  in Coimbatore</span>
+                  <span class="seprator"> | </span>
+                </a>
+             </li>
+                             </ul>
+                       </div>
+        <div class="col" id="events-calender">
+                        </div>
+      </div>
+      <div class="col movie-trailers">
+        <h4>EVENTS TICKETS BOOKING ONLINE</h4>
+        <ul class="groups">
+          <li><a href="/mumbai/events" class="link-foot" title="Upcoming Events in Mumbai"><span>Upcoming Events in Mumbai</span><span class="seprator"> | </span></a></li>
+          <li><div style="word-wrap: break-word;"><a href="/delhi/events"class="link-foot" title="Upcoming Events in Delhi"><span>Upcoming Events in Delhi</span><span class="seprator"> | </span></a></div></li>
+          <li><a href="/bengaluru/events" class="link-foot"title="Upcoming Events in Bengaluru"><span>Upcoming Events in Bengaluru</span><span class="seprator"> | </span></a></li>
+          <li><a href="/chennai/events" class="link-foot"title="Upcoming Events in Chennai"><span>Upcoming Events in Chennai</span><span class="seprator"> | </span></a></li>
+          <li><a href="/hyderabad/events" class="link-foot"title="Upcoming Events in Hyderabad"><span>Upcoming Events in Hyderabad</span><span class="seprator"> | </span></a></li>
+          <li><a href="/pune/events"class="link-foot" title="Upcoming Events in Pune"><span>Upcoming Events in Pune</span><span class="seprator"> | </span></a></li>
+          <li><a href="/noida/events" class="link-foot"title="Upcoming Events in Noida"><span>Upcoming Events in Noida</span><span class="seprator"> | </span></a></li>
+          <li><a href="/ahmedabad/events" class="link-foot"title="Upcoming Events in Ahmedabad"><span>Upcoming Events in Ahmedabad</span></a></li>
+        </ul>
+      </div>
+      <div class="col cinemas-and-regions">
+        <h4>MOVIES, CINEMAS &amp; CELEBRITY </h4>
+        <ul class="groups">
+          <li><a href="/movies/comingsoon" class="link-foot"title="Latest Upcoming Movies"><span>Latest Upcoming Movies</span><span class="seprator"> | </span></a></li>
+          <li><a href="/movies/nowshowing" class="link-foot"title="Best Now Showing Movies"><span>Best Now Showing Movies</span><span class="seprator"> | </span></a></li>
+          <li><a href="/cinemas" class="link-foot"title="Cinemas &amp;amp; Theatres"><span>Cinemas &amp; Theatres</span><span class="seprator"> | </span></a></li>
+          <li><a href="/person" class="link-foot"title=" Movie Stars &amp;amp; Celebrities"><span> Movie Stars &amp; Celebrities</span><span class="seprator"> | </span></a></li>
+          <li><a href="/cinema-chains"class="link-foot" title="Cinema Chains"><span>Cinema Chains</span><span class="seprator"> | </span></a></li>
+          <li><a href="/regions"class="link-foot" title="All regions Cinemas"><span>All regions Cinemas</span></a></li>
+        </ul>
+      </div>
+        <div class="col">
+        <div class="col movie-trailers" id="movie-trailers">
+                          <h4>ARCHIVED COLLECTION </h4>
+          <ul class="groups">
+            <li><a href="/years/2019/movies" class="link-foot"title="Old Movies"><span>Old Movies</span><span class="seprator"> | </span></a></li>
+            <li><a href="/years/2019/events" class="link-foot"title="Past Events"><span>Past Events</span><span class="seprator"> | </span></a></li>
+            <li><a href="/years/2019/sports" class="link-foot"title="Classic Sports Events"><span>Classic Sports Events</span><span class="seprator"> | </span></a></li>
+            <li><a href="/years/2019/plays"class="link-foot" title="Old Theatre Plays"><span>Old Theatre Plays</span><span class="seprator"> | </span></a></li>
+            <li><a href="/top/best-movies-2016" class="link-foot"><span>Best Movies 2016</span><span class="seprator"> | </span></a></li>
+            <li><a href="/top/best-of-2017" class="link-foot"><span>Best Of 2017</span><span class="seprator"> | </span></a></li>
+            <li><a href="/top/best-of-2018" class="link-foot"><span>Best Of 2018</span></a></li>
+          </ul>
+                        </div>
+                        
+        <div class="col" id="country">
+            
+          <h4>COUNTRIES</h4>
+          <ul class="groups">
+            <!-- <li><a href="http://bd.bookmyshow.com/" rel="noopener noreferrer" target="_blank" title="Bangladesh"><span>Bangladesh</span><span class="seprator"> | </span></a></li> -->
+            <li><a href="https://id.bookmyshow.com/"class="link-foot" rel="noopener noreferrer" target="_blank" title="Indonesia"><span>Indonesia</span><span class="seprator"> | </span></a></li>
+            <li><a href="https://sg.bookmyshow.com/" class="link-foot"rel="noopener noreferrer" target="_blank" title="Singapore"><span>Singapore</span><span class="seprator"> | </span></a></li>
+            <!--<li><a href="http://bookmyshow.co.nz/" rel="noopener noreferrer" target="_blank" title="New Zealand"><span>New Zealand</span><span class="seprator"> | </span></a></li>-->
+            <li><a href="https://ae.bookmyshow.com/" class="link-foot"rel="noopener noreferrer" target="_blank" title="UAE"><span>UAE</span><span class="seprator"> | </span></a></li>
+            <li><a href="https://lk.bookmyshow.com"class="link-foot" rel="noopener noreferrer" target="_blank" title="Sri Lanka"><span>Sri Lanka</span><span class="seprator"> | </span></a></li>
+            <li><a href="https://wi.bookmyshow.com" class="link-foot"rel="noopener noreferrer" target="_blank" title="West Indies"><span>West Indies</span></a></li>
+          </ul>
+        </div>
+         </div>
+      </div>
+      <div class="row">
+        <div class="col app">
+          <h4>BOOKMYSHOW APP </h4>
+          <ul class="groups">
+            <li><a href="/mobile?app=iphone" class="link-foot"title="BMS Ticketing iOS App"><span>BMS Ticketing iOS App</span><span class="seprator"> | </span></a></li>
+            <li><a href="/mobile?app=android" class="link-foot"title="BMS Ticketing Android App"><span>BMS Ticketing Android App</span><span class="seprator"> | </span></a></li>
+            <!--li><a href="/mobile?app=windows" title="BMS Ticketing Windows App"><span>BMS Ticketing Windows App</span></a></li>
+            <li><a href="https://apps.facebook.com/ticketbuddy/" rel="nofollow" title="Ticket Buddy"><span>Facebook - Ticket Buddy</span></a></li-->
+          </ul>
+        </div>
+
+        <div class="col news">
+          <h4>BOOKMYSHOW NEWS</h4>
+          <ul class="groups">
+            <li><a href="/entertainment" class="link-foot" title="Buzz"><span>Buzz</span><span class="seprator"> | </span></a></li>
+            <li><a href="/static/press-release " class="link-foot" title="Press Release"><span>Press Release</span><span class="seprator"> | </span></a></li>
+            <li><a href="/static/press-coverage" class="link-foot"title="Press Coverage"><span>Press Coverage</span><span class="seprator"> | </span></a></li>
+            <!-- <li><a href="/static/press-contact" title="Public Relations"><span>Public Relations</span></a></li> -->
+            <!-- <li><a href="/aboutus" title="About Us"><span>About Us</span></a></li> -->
+            <li><a href="/careers/"class="link-foot" title="Current Openings"><span>Current Openings</span><span class="seprator"> | </span></a></li>
+            <li><a href="/contactus" class="link-foot"title="Contact Us"><span>Contact Us</span><span class="seprator"> | </span></a></li>
+            <li><a href="/aboutus" class="link-foot"title="ABout Us"><span>About Us</span></a></li>
+          </ul>
+        </div>
+        <div class="col help">
+          <h4>EXCLUSIVES</h4>
+          <ul class="groups">
+            <li id="loyaltyFooterLogo">
+              <a href="/superstar"class="link-foot" title="Superstar">
+                <div class="logo-block">
+                  Superstar
+                  <span class="store-new loyalty-new">NEW</span>
+                </div>
+              </a>
+            </li>
+            <li><a href="/donation" class="link-foot"title="BookASmile"><span id="loyaltyFooterSeparator" style="display: inline-block;" class="seprator"> | </span> <span>BookASmile</span><span class="seprator"> | </span></a></li>
+            <li><a href="/voucher" class="link-foot"title="Corporate Vouchers"><span>Corporate Vouchers</span><span class="seprator"> | </span></a></li>
+            <li><a href="/giftcards" class="link-foot"onclick="ga('send', 'event', 'Gift Card', 'Source_click', 'Footer - Gift Card text');" title="Gift Cards"><span>Gift Cards</span><span class="seprator"> | </span></a></li>
+<!--                  <li><a href="/static/unpaid-advance-movie-booking" title="Reserve Your Seat"><span>Reserve Your Seat</span><span class="seprator"> | </span></a></li> -->
+            <li><a href="/coupons"class="link-foot" title="My Coupons"><span>My Coupons</span><span class="seprator"> | </span></a></li>
+            <li><a href="/movies/box-office"class="link-foot" title="Box Office Collection"><span>Box Office Collection</span><span class="seprator"></span></a> <span class="store-new loyalty-new">NEW</span></li>
+
+          </ul>
+        </div>
+        <div class="col exclusives">
+          <h4>HELP</h4>
+          <ul class="groups">
+            <li><a href="/static/sitemap" class="link-foot"title="Sitemap"><span>Sitemap</span><span class="seprator"> | </span></a></li>
+            <!-- <li><a href="/feedback" title="Feedback"><span>Feedback</span></a></li> -->
+            <li><a href="/faq" class="link-foot"title="FAQs"><span>FAQs</span><span class="seprator"> | </span></a></li>
+            <li><a href="/terms-and-conditions"class="link-foot" title="Terms and Conditions"><span>Terms and Conditions</span><span class="seprator"> | </span></a></li>
+            <li><a href="/privacy" class="link-foot"title="Privacy Policy"><span>Privacy Policy</span><span class="seprator"> | </span></a></li>
+            <li><a href="javascript:;" class="link-foot"title="Report Content" onclick="ContentReport.reportButtonClickListener(event);"><span>Report Content</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+          <div class="footer-links ">
+  </div>
+  <!-- Footer links Ends here -->
+
+    <div class="copy-right">
+   <p > <center>Copyright 2019 © Bigtree Entertainment Pvt. Ltd. All Rights Reserved.<br>
+    The content and images used on this site are copyright protected and copyrights vests with the respective owners. The usage of the content and images on this website is intended to promote the works and no endorsement of the artist shall be implied.  Unauthorized use is prohibited and punishable by law.</p>
+    </center>
+ 
+  </div>
+</div>
+    </footer>
+  </body>
+</html>
